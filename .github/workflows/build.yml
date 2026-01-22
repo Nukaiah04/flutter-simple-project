@@ -1,4 +1,4 @@
-name: Flutter Simple Build
+name: Flutter Web Docker Build
 
 on:
   push:
@@ -10,16 +10,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-    - name: Setup Flutter
-      uses: subosito/flutter-action@v2
-      with:
-        flutter-version: '3.19.0'
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.19.0'
 
-    - name: Install dependencies
-      run: flutter pub get
+      - name: Install dependencies
+        run: flutter pub get
 
-    - name: Build Flutter web
-      run: flutter build web
+      - name: Build Flutter web
+        run: flutter build web
+
+      - name: Build Docker image
+        run: docker build -t flutter-web .
